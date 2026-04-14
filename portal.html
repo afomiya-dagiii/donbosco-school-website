@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Don Bosco | Interactive Exam Hub</title>
+    <style>
+        :root { --brand-red: #c0392b; --white: #ffffff; --light-bg: #fdf2f2; --text: #2c3e50; }
+        body { font-family: 'Segoe UI', sans-serif; background: var(--light-bg); color: var(--text); margin: 0; padding: 20px; }
+        .container { max-width: 900px; margin: auto; }
+
+        header { background: var(--brand-red); color: white; padding: 40px 20px; border-radius: 12px; text-align: center; margin-bottom: 20px; }
+        
+        /* Dropdown Styles */
+        .year-card { background: white; margin-bottom: 15px; border-radius: 8px; border: 1px solid #ddd; overflow: hidden; }
+        .year-header { padding: 20px; cursor: pointer; display: flex; justify-content: space-between; font-weight: bold; background: #fff; }
+        .year-header:hover { background: #f9f9f9; }
+        
+        .dropdown-content { display: none; padding: 15px; border-top: 1px solid #eee; background: #fafafa; }
+        .subject-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 10px; }
+        
+        .btn { padding: 8px; background: var(--brand-red); color: white; text-decoration: none; border-radius: 4px; font-size: 0.8rem; text-align: center; }
+        .btn:hover { opacity: 0.9; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Don Bosco Exam Portal</h1>
+        <p>Select a year to explore subjects and begin your practice.</p>
+    </header>
+
+    <div id="year-list"></div>
+</div>
+
+<script>
+    const years = [2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016];
+    const list = document.getElementById('year-list');
+
+    years.forEach(year => {
+        list.innerHTML += `
+            <div class="year-card">
+                <div class="year-header" onclick="toggleDropdown(${year})">
+                    <span>📁 Matric Exam Year ${year}</span>
+                    <span>▼</span>
+                </div>
+                <div id="drop-${year}" class="dropdown-content">
+                    <strong>Natural Science</strong>
+                    <div class="subject-grid" style="margin: 10px 0 20px 0;">
+                        <a href="#" class="btn">Math</a> <a href="#" class="btn">Physics</a>
+                        <a href="#" class="btn">Chemistry</a> <a href="#" class="btn">Biology</a>
+                    </div>
+                    <strong>Social Science</strong>
+                    <div class="subject-grid" style="margin: 10px 0;">
+                        <a href="#" class="btn">History</a> <a href="#" class="btn">Geography</a>
+                        <a href="#" class="btn">Economics</a> <a href="#" class="btn">English</a>
+                    </div>
+                </div>
+            </div>
+        `;
+    });
+
+    function toggleDropdown(year) {
+        let content = document.getElementById('drop-' + year);
+        content.style.display = (content.style.display === "block") ? "none" : "block";
+    }
+</script>
+
+</body>
+</html>
